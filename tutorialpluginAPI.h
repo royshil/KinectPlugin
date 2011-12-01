@@ -14,10 +14,30 @@
 #ifndef H_tutorialpluginAPI
 #define H_tutorialpluginAPI
 
+
+
 class tutorialpluginAPI : public FB::JSAPIAuto
 {
 public:
-    tutorialpluginAPI(const tutorialpluginPtr& plugin, const FB::BrowserHostPtr& host);
+    tutorialpluginAPI(const tutorialpluginPtr& plugin, const FB::BrowserHostPtr& host):m_plugin(plugin), m_host(host)
+	{
+		registerMethod("echo",				make_method(this, &tutorialpluginAPI::echo));
+		registerMethod("testEvent",			make_method(this, &tutorialpluginAPI::testEvent));
+		registerMethod("add",				make_method(this, &tutorialpluginAPI::add));
+		
+		// Read-write property
+		registerProperty("testString",
+						 make_property(this,
+									   &tutorialpluginAPI::get_testString,
+									   &tutorialpluginAPI::set_testString));
+		
+		// Read-only property
+		registerProperty("version",
+						 make_property(this,
+									   &tutorialpluginAPI::get_version));
+	}
+		
+
     virtual ~tutorialpluginAPI();
 
     tutorialpluginPtr getPlugin();
@@ -39,6 +59,8 @@ public:
 
     // Method test-event
     void testEvent(const FB::variant& s);
+	
+	long add(long a, long b, long c);
 
 private:
     tutorialpluginWeakPtr m_plugin;

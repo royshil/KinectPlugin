@@ -21,22 +21,8 @@
 /// @see FB::JSAPIAuto::registerProperty
 /// @see FB::JSAPIAuto::registerEvent
 ///////////////////////////////////////////////////////////////////////////////
-tutorialpluginAPI::tutorialpluginAPI(const tutorialpluginPtr& plugin, const FB::BrowserHostPtr& host) : m_plugin(plugin), m_host(host)
-{
-    registerMethod("echo",      make_method(this, &tutorialpluginAPI::echo));
-    registerMethod("testEvent", make_method(this, &tutorialpluginAPI::testEvent));
+//tutorialpluginAPI::tutorialpluginAPI(const tutorialpluginPtr& plugin, const FB::BrowserHostPtr& host) : m_plugin(plugin), m_host(host)
 
-    // Read-write property
-    registerProperty("testString",
-                     make_property(this,
-                        &tutorialpluginAPI::get_testString,
-                        &tutorialpluginAPI::set_testString));
-
-    // Read-only property
-    registerProperty("version",
-                     make_property(this,
-                        &tutorialpluginAPI::get_version));
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn tutorialpluginAPI::~tutorialpluginAPI()
@@ -97,3 +83,4 @@ void tutorialpluginAPI::testEvent(const FB::variant& var)
     fire_fired(var, true, 1);
 }
 
+long tutorialpluginAPI::add(long a, long b, long c) { return a+b+c;}

@@ -11,6 +11,11 @@
 
 #include "tutorialplugin.h"
 
+#include <iostream>
+using namespace std;
+
+int head_extractor_main(int argc, char** argv);
+
 ///////////////////////////////////////////////////////////////////////////////
 /// @fn tutorialplugin::StaticInitialize()
 ///
@@ -64,7 +69,7 @@ void tutorialplugin::onPluginReady()
     // When this is called, the BrowserHost is attached, the JSAPI object is
     // created, and we are ready to interact with the page and such.  The
     // PluginWindow may or may not have already fire the AttachedEvent at
-    // this point.
+    // this point.	
 }
 
 void tutorialplugin::shutdown()
@@ -95,30 +100,34 @@ FB::JSAPIPtr tutorialplugin::createJSAPI()
 
 bool tutorialplugin::onMouseDown(FB::MouseDownEvent *evt, FB::PluginWindow *)
 {
-    //printf("Mouse down at: %d, %d\n", evt->m_x, evt->m_y);
+    printf("Mouse down at: %d, %d\n", evt->m_x, evt->m_y);
     return false;
 }
 
 bool tutorialplugin::onMouseUp(FB::MouseUpEvent *evt, FB::PluginWindow *)
 {
-    //printf("Mouse up at: %d, %d\n", evt->m_x, evt->m_y);
+//    printf("Mouse up at: %d, %d\n", evt->m_x, evt->m_y);
     return false;
 }
 
 bool tutorialplugin::onMouseMove(FB::MouseMoveEvent *evt, FB::PluginWindow *)
 {
-    //printf("Mouse move at: %d, %d\n", evt->m_x, evt->m_y);
+//    printf("Mouse move at: %d, %d\n", evt->m_x, evt->m_y);
     return false;
 }
+
+int kinect_main(int argc, char ** argv);
 bool tutorialplugin::onWindowAttached(FB::AttachedEvent *evt, FB::PluginWindow *)
 {
     // The window is attached; act appropriately
-    return false;
+	kinect_main(0, 0);
+	cout << "tutorialplugin::onWindowAttached" << endl;
+    return true;
 }
 
 bool tutorialplugin::onWindowDetached(FB::DetachedEvent *evt, FB::PluginWindow *)
 {
     // The window is about to be detached; act appropriately
-    return false;
+    return true;
 }
 

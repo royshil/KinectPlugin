@@ -15,7 +15,6 @@
 
 #include "PluginCore.h"
 
-
 FB_FORWARD_PTR(tutorialplugin)
 class tutorialplugin : public FB::PluginCore
 {
@@ -36,6 +35,7 @@ public:
     // value of the "windowless" param tag, remove this method or return
     // FB::PluginCore::isWindowless()
     virtual bool isWindowless() { return false; }
+
 
     BEGIN_PLUGIN_EVENT_MAP()
         EVENTTYPE_CASE(FB::MouseDownEvent, onMouseDown, FB::PluginWindow)

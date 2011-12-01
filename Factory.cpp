@@ -8,7 +8,11 @@
 \**********************************************************/
 
 #include "FactoryBase.h"
+#if FB_WIN
 #include "tutorialplugin.h"
+#else
+#include "Mac/tutorialpluginMac.h"
+#endif
 #include <boost/make_shared.hpp>
 
 class PluginFactory : public FB::FactoryBase
@@ -22,7 +26,11 @@ public:
     ///////////////////////////////////////////////////////////////////////////////
     FB::PluginCorePtr createPlugin(const std::string& mimetype)
     {
+#if FB_WIN
         return boost::make_shared<tutorialplugin>();
+#else
+        return boost::make_shared<tutorialpluginMac>();
+#endif
     }
     
     ///////////////////////////////////////////////////////////////////////////////
